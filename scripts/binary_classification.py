@@ -7,12 +7,17 @@ def main():
     # Define directories
     current_directory = os.getcwd()
     data_directory = os.path.join(current_directory, 'data', 'png')
+    results_directory = os.path.join(current_directory, 'results', 'binary_classification')
 
     # List all classes (files) in the data directory
     classes = os.listdir(data_directory)
 
     # Sort the classes
     classes.sort()
+
+    # Remove the .DS_Store file
+    if '.DS_Store' in classes:
+        classes.remove('.DS_Store')
 
     # Print the classes
     print(classes)
