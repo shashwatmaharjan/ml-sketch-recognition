@@ -30,7 +30,7 @@ def main():
 
     # Define directories
     current_directory = os.getcwd()
-    data_directory = os.path.join(current_directory, 'data', 'png')
+    data_directory = os.path.join(current_directory, 'data', 'raw')
 
     # List all classes (files) in the data directory
     classes = os.listdir(data_directory)
