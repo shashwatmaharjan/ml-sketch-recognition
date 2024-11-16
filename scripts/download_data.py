@@ -4,7 +4,10 @@ import os
 # Main function
 def main():
 
-    pass
+    # Define directories
+    current_directory = os.getcwd()
+    data_directory = os.path.join(current_directory, 'data', 'png')
+    
 
 if __name__ == '__main__':
 
