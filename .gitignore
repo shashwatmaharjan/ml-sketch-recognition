@@ -3,3 +3,7 @@
 
 # Folders
 /env
+
+# Data files
+*.png
+*.svg
