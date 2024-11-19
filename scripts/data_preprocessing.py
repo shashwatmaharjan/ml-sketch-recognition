@@ -33,16 +33,6 @@ def main():
     current_directory = os.getcwd()
     data_directory = os.path.join(current_directory, 'data')
     images_data_directory = os.path.join(current_directory, 'data', 'images')
-
-    # List all classes (files) in the data directory
-    classes = os.listdir(images_data_directory)
-
-    # Sort the classes
-    classes.sort()
-
-    # Remove the .DS_Store file
-    if '.DS_Store' in classes:
-        classes.remove('.DS_Store')
     
     # Create an empty dictionary labelled classes
     categories = {}
