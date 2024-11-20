@@ -39,20 +39,20 @@ def main():
 
     # Add the following subclass to the vehicles class
     subclass = 'vehicles'
-    classes[subclass] = ['bear', 'bee', 'butterfly', 'camel', 'cat', 'cow', 'crab', 'crocodile', 
-                              'dog', 'dolphin', 'duck', 'elephant', 'fish', 'frog', 'giraffe', 'hedgehog', 
-                              'kangaroo', 'lion', 'lobster', 'monkey', 'mouse', 'octopus', 'owl', 'panda', 
-                              'parrot', 'penguin', 'pig', 'pigeon', 'rabbit', 'rooster', 'scorpion', 'shark', 
-                              'sheep', 'snail', 'snake', 'spider', 'squirrel', 'swan', 'tiger', 'zebra']
+    classes[subclass] = ['airplane', 'blimp', 'bus', 'car', 'pickup truck', 'race car', 'suv', 
+                            'truck', 'van', 'bulldozer', 'bicycle', 'motorbike', 'ship', 'speed-boat', 
+                            'canoe', 'sailboat', 'submarine', 'helicopter', 'space shuttle', 'train']
     
     # Check if all of these subclass exist in the raw file directory
     return_folder_not_exist(classes[subclass], subclass, images_data_directory)
 
     # Add the following subclass to the animals class
     subclass = 'animals'
-    classes[subclass] = ['airplane', 'blimp', 'bus', 'car', 'pickup truck', 'race car', 'suv', 
-                        'truck', 'van', 'bulldozer', 'bicycle', 'motorbike', 'ship', 'speed-boat', 
-                        'canoe', 'sailboat', 'submarine', 'helicopter', 'space shuttle', 'train']
+    classes[subclass] = ['bear', 'camel', 'cat', 'cow', 'crab', 'crocodile', 
+                            'dog', 'dolphin', 'elephant', 'fish', 'frog', 'giraffe', 'hedgehog', 
+                            'kangaroo', 'lion', 'lobster', 'monkey', 'mouse', 'octopus', 'panda', 
+                            'penguin', 'pig', 'rabbit', 'rooster', 'scorpion', 'shark', 
+                            'sheep', 'snail', 'snake', 'squirrel', 'tiger', 'zebra']
     
     # Check if all of these subclass exist in the raw file directory
     return_folder_not_exist(classes[subclass], subclass, images_data_directory)
@@ -60,16 +60,16 @@ def main():
     # Add the following subclass to the food class
     subclass = 'food'
     classes[subclass] = ['apple', 'banana', 'bread', 'cake', 'carrot', 'donut', 'grapes', 'hamburger', 
-                          'hot-dog', 'ice-cream-cone', 'pear', 'pineapple', 'pizza', 'pumpkin', 'strawberry', 'tomato']
+                            'hot-dog', 'ice-cream-cone', 'pear', 'pineapple', 'pizza', 'pumpkin', 'strawberry', 'tomato']
     
     # Check if all of these subclass exist in the raw file directory
     return_folder_not_exist(classes[subclass], subclass, images_data_directory)
     
     # Add the following subclass to the household objects class
     classes['household_objects'] = ['alarm clock', 'armchair', 'ashtray', 'bed', 'bookshelf', 'bowl', 'cabinet', 
-                                       'candle', 'chair', 'couch', 'door', 'fan', 'floor lamp', 'fork', 'frying-pan', 
-                                       'knife', 'ladder', 'tablelamp', 'mug', 'spoon', 'stapler', 'table', 
-                                       'teapot', 'toilet', 'toothbrush', 'tv', 'eyeglasses', 'umbrella']
+                                        'candle', 'chair', 'couch', 'door', 'fan', 'floor lamp', 'fork', 'frying-pan', 
+                                        'knife', 'ladder', 'tablelamp', 'mug', 'spoon', 'stapler', 'table', 
+                                        'teapot', 'toilet', 'toothbrush', 'tv', 'eyeglasses', 'umbrella']
     
     # Check if all of these subclass exist in the raw file directory
     subclass = 'household_objects'
@@ -78,7 +78,7 @@ def main():
     # Add the following categories in the miscellaneous categories
     subclass = 'miscellaneous'
     classes[subclass] = ['binoculars', 'boomerang', 'brain', 'calculator', 'crown', 'diamond', 'envelope', 'present',
-                                    'parachute', 'paper clip', 'human-skeleton', 'sword', 'revolver', 'grenade', 'castle']
+                            'parachute', 'paper clip', 'human-skeleton', 'sword', 'revolver', 'grenade', 'castle']
     
     # Check if all of these subclass exist in the raw file directory
     return_folder_not_exist(classes[subclass], subclass, images_data_directory)
