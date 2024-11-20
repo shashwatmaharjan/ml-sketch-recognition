@@ -49,19 +49,21 @@ def main():
     return_folder_not_exist(categories[category], category, images_data_directory)
 
     # Add the following subcategories to the animals class
-    categories['animals'] = ['airplane', 'blimp', 'bus', 'car', 'pickup truck', 'race car', 'suv', 
+    category = 'animals'
+    categories[category] = ['airplane', 'blimp', 'bus', 'car', 'pickup truck', 'race car', 'suv', 
                         'truck', 'van', 'bulldozer', 'bicycle', 'motorbike', 'ship', 'speed-boat', 
                         'canoe', 'sailboat', 'submarine', 'helicopter', 'space shuttle', 'train']
     
     # Check if all of these subcategories exist in the raw file directory
-    return_folder_not_exist(categories['animals'], 'animals', images_data_directory)
+    return_folder_not_exist(categories[category], category, images_data_directory)
     
     # Add the following subcategories to the food class
-    categories['food'] = ['apple', 'banana', 'bread', 'cake', 'carrot', 'donut', 'grapes', 'hamburger', 
+    category = 'food'
+    categories[category] = ['apple', 'banana', 'bread', 'cake', 'carrot', 'donut', 'grapes', 'hamburger', 
                           'hot-dog', 'ice-cream-cone', 'pear', 'pineapple', 'pizza', 'pumpkin', 'strawberry', 'tomato']
     
     # Check if all of these subcategories exist in the raw file directory
-    return_folder_not_exist(categories['food'], 'food', images_data_directory)
+    return_folder_not_exist(categories[category], category, images_data_directory)
     
     # Add the following subcategories to the household objects class
     categories['household_objects'] = ['alarm clock', 'armchair', 'ashtray', 'bed', 'bookshelf', 'bowl', 'cabinet', 
@@ -70,14 +72,16 @@ def main():
                                        'teapot', 'toilet', 'toothbrush', 'tv', 'eyeglasses', 'umbrella']
     
     # Check if all of these subcategories exist in the raw file directory
-    return_folder_not_exist(categories['household_objects'], 'household_objects', images_data_directory)
+    category = 'household_objects'
+    return_folder_not_exist(categories[category], category, images_data_directory)
     
     # Add the following categories in the miscellaneous categories
-    categories['miscellaneous'] = ['binoculars', 'boomerang', 'brain', 'calculator', 'crown', 'diamond', 'envelope', 'present',
+    category = 'miscellaneous'
+    categories[category] = ['binoculars', 'boomerang', 'brain', 'calculator', 'crown', 'diamond', 'envelope', 'present',
                                     'parachute', 'paper clip', 'human-skeleton', 'sword', 'revolver', 'grenade', 'castle']
     
     # Check if all of these subcategories exist in the raw file directory
-    return_folder_not_exist(categories['miscellaneous'], 'miscellaneous', images_data_directory)
+    return_folder_not_exist(categories[category], category, images_data_directory)
 
     # Save the categories to a .json file
     with open(os.path.join(data_directory, 'categories.json'), 'w') as file:
