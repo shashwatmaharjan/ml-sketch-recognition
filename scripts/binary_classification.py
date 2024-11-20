@@ -1,38 +1,35 @@
 # Import necessary libraries
 import os
+import json
 
 # Main function
 def main():
 
     # Define directories
     current_directory = os.getcwd()
-    data_directory = os.path.join(current_directory, 'data', 'png')
+    data_directory = os.path.join(current_directory, 'data')
+    images_data_directory = os.path.join(current_directory, 'data', 'images')
     results_directory = os.path.join(current_directory, 'results', 'binary_classification')
 
-    # List all classes (files) in the data directory
-    classes = os.listdir(data_directory)
+    # Open the .json files with the class names
+    with open(os.path.join(data_directory, 'classes.json'), 'r') as file:
+        classes = json.load(file)
 
-    # Sort the classes
-    classes.sort()
+    # How many results per subclass?
+    num_per_subclass = 80
 
-    # Remove the .DS_Store file
-    if '.DS_Store' in classes:
-        classes.remove('.DS_Store')
+    # Working classes for binary classification
+    selected_classes = {}
+    selected_classes['household_objects'] = classes['household_objects']
+    selected_classes['animals'] = classes['animals']
 
-    # Print the classes
-    print(classes)
+    # Number of dataset in each class
+    num_household_objects = len(selected_classes['household_objects']) * num_per_subclass
+    print(f'Number of household objects: {num_household_objects}')
 
-    # Choose a class to visualize
-    class_name = classes[0]
+    num_animals = len(selected_classes['animals']) * num_per_subclass
+    print(f'Number of animals: {num_animals}')
 
-    # Choose the first file in the class to plot
-    filenames = os.listdir(os.path.join(data_directory, class_name))
-
-    # Sort the filenames
-    filenames.sort()
-
-    print(filenames)
-    
 
 if __name__ == '__main__':
 
