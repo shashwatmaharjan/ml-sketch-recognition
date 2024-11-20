@@ -84,7 +84,7 @@ def main():
     return_folder_not_exist(classes[subclass], subclass, images_data_directory)
 
     # Save the categories to a .json file
-    with open(os.path.join(data_directory, 'categories.json'), 'w') as file:
+    with open(os.path.join(data_directory, 'classes.json'), 'w') as file:
         json.dump(classes, file, indent=4, sort_keys=True)
     
     
