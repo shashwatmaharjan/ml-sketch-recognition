@@ -4,6 +4,14 @@ import json
 import numpy as np
 import matplotlib.image as mpimg
 
+# Function to compress the images
+def compress_image(img):
+    
+    # Compress the image to about 1/3rd of its size
+    factor = 3
+    
+    return img[::factor, ::factor]
+
 # Main function
 def main():
 
@@ -29,7 +37,7 @@ def main():
             os.makedirs(os.path.join(npy_files_directory, class_name))
         
         # Loop through all the subclasses
-        for subclass in classes[class_name]:
+        for n_subclass, subclass in enumerate(classes[class_name]):
             
             # List all the images in the directory with .png extension
             all_images = os.listdir(os.path.join(images_data_directory, subclass))
@@ -45,22 +53,41 @@ def main():
                     # Load the image
                     img = mpimg.imread(os.path.join(images_data_directory, subclass, image))
                     
+                    # Compress the image
+                    img = compress_image(img)
+                    
                     # Convert the image to a numpy array
                     img_array = np.array(img)
+                    
+                    if n_subclass == 0:
+                        
+                        subclass_img_array = img_array
                 
                 else:
                     
                     # Load the image
                     img = mpimg.imread(os.path.join(images_data_directory, subclass, image))
                     
+                    # Compress the image
+                    img = compress_image(img)
+                    
                     # Convert the image to a numpy array
                     img_array = np.dstack((img_array, img))
+                    
+                    # Concatenate the images of the same subclass
+                    subclass_img_array = np.dstack((subclass_img_array, img))
             
             # Print a message
             print(f'Class: {class_name} - Subclass: {subclass} Finished!')
             
             # Save the numpy array
             np.save(os.path.join(npy_files_directory, class_name, f'{subclass}.npy'), img_array)
+        
+        # Save the numpy array
+        np.save(os.path.join(npy_files_directory, f'{class_name}.npy'), subclass_img_array)
+        
+        # Print a message
+        print(f'Class: {class_name} Finished!')
     
     # Print a message
     print('All images have been converted to .npy files!')
