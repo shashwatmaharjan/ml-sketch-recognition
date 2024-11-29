@@ -30,13 +30,17 @@ def main():
 
     # Define directories
     current_directory = os.getcwd()
-    data_directory = os.path.join(current_directory, 'data', 'raw')
+    data_directory = os.path.join(current_directory, 'data', 'images')
 
     # List all classes (files) in the data directory
     classes = os.listdir(data_directory)
 
     # Sort the classes
     classes.sort()
+    
+    # Remove the .DS_Store file
+    if '.DS_Store' in classes:
+        classes.remove('.DS_Store')
 
     # Choose a class to visualize
     class_name = classes[0]
@@ -46,6 +50,10 @@ def main():
 
     # Sort the filenames
     filenames.sort()
+    
+    # Remove the .DS_Store file
+    if '.DS_Store' in filenames:
+        filenames.remove('.DS_Store')
 
     # Plot the image
     img_shape = plot_images(filenames[0], class_name, data_directory)
