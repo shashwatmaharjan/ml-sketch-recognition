@@ -20,9 +20,6 @@ def main():
     # Open the .json files with the class names
     with open(os.path.join(data_directory, 'classes.json'), 'r') as file:
         classes = json.load(file)
-
-    # How many results per subclass?
-    num_per_subclass = 80
     
     # Loop through all the classes and convert the images to .npy files
     for class_name in classes.keys():
