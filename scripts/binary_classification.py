@@ -21,11 +21,15 @@ def main():
     selected_classes['household_objects'] = classes['household_objects']
     selected_classes['animals'] = classes['animals']
 
-    # Number of dataset in each class
-    num_household_objects = len(selected_classes['household_objects'])
-    print(f'Number of household objects: {num_household_objects}')
+    # Load the .npy files
+    household_objects = np.load(os.path.join(npy_files_directory, 'household_objects.npy'))
+    animals = np.load(os.path.join(npy_files_directory, 'animals.npy'))
 
-    num_animals = len(selected_classes['animals'])
+    # Number of dataset in each class
+    num_household_objects = household_objects.shape[2]
+    print(f'Number of household objects: {num_household_objects}')
+    
+    num_animals = animals.shape[2]
     print(f'Number of animals: {num_animals}')
     
     
