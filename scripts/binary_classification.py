@@ -8,7 +8,7 @@ def main():
     # Define directories
     current_directory = os.getcwd()
     data_directory = os.path.join(current_directory, 'data')
-    images_data_directory = os.path.join(current_directory, 'data', 'images')
+    npy_files_directory = os.path.join(current_directory, 'data', 'npy')
     results_directory = os.path.join(current_directory, 'results', 'binary_classification')
 
     # Open the .json files with the class names
