@@ -1,6 +1,7 @@
 # Import necessary libraries
 import os
 import json
+import numpy as np
 
 # Main function
 def main():
@@ -15,20 +16,19 @@ def main():
     with open(os.path.join(data_directory, 'classes.json'), 'r') as file:
         classes = json.load(file)
 
-    # How many results per subclass?
-    num_per_subclass = 80
-
     # Working classes for binary classification
     selected_classes = {}
     selected_classes['household_objects'] = classes['household_objects']
     selected_classes['animals'] = classes['animals']
 
     # Number of dataset in each class
-    num_household_objects = len(selected_classes['household_objects']) * num_per_subclass
+    num_household_objects = len(selected_classes['household_objects'])
     print(f'Number of household objects: {num_household_objects}')
 
-    num_animals = len(selected_classes['animals']) * num_per_subclass
+    num_animals = len(selected_classes['animals'])
     print(f'Number of animals: {num_animals}')
+    
+    
 
 
 if __name__ == '__main__':
