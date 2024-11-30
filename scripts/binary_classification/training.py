@@ -50,7 +50,7 @@ class CNN(nn.Module):
         super(CNN, self).__init__()
         
         # First convolutional layer
-        self.conv1 = nn.Conv2d(in_channels=1, out_channels=8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
         
         # Note: kernel_size = (3, 3), stride = (1, 1), and padding = (1, 1) combination is called "same convolution"
         # because the input and output have the same spatial dimensions
