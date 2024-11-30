@@ -148,6 +148,10 @@ def main():
     # Instantiate the model
     model = CNN().to(device)
     
+    # # Pass the basic tensor to see if the model is working
+    # x = torch.randn(64, 1, 371, 371).to(device)
+    # print(model(x).shape)
+    
 
 if __name__ == '__main__':
 
