@@ -43,53 +43,50 @@ def split_data(data, labels):
 # CNN model
 class CNN(nn.Module):
     
-    def __init__(self):
+    # Here we are basically defining the layers of the model
+    # To then use them in the forward pass
+    def __init__(self, in_channels=1, num_classes=2):
         
         super(CNN, self).__init__()
         
-        # Define convolutional layer
-        self.conv1 = nn.Conv2d(in_channels=1, out_channels=16, 
-                               kernel_size=3, stride=1, padding=1)
+        # First convolutional layer
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
         
-        # Define maxpooling layer
-        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+        # Note: kernel_size = (3, 3), stride = (1, 1), and padding = (1, 1) combination is called "same convolution"
+        # because the input and output have the same spatial dimensions
+        # Can verify using n_out = (n_in - k + 2*p)/s + 1
         
-        # Define convolutional layer
-        self.conv2 = nn.Conv2d(in_channels=16, out_channels=32, 
-                               kernel_size=3, stride=1, padding=1)
+        # Max pooling layer
+        # Halves the spatial dimensions
+        self.pool = nn.MaxPool2d(kernel_size=(2, 2), stride=(2, 2))
         
-        # Define maxpooling layer
-        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+        # Second convolutional layer
+        self.conv2 = nn.Conv2d(in_channels=8, out_channels=16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
         
-        # Define fully connected layer
-        # Doubles as a flattening layer
-        self.fc1 = nn.Linear(in_features=92*92*32, out_features=1024)
-        
-        # Define final fully connected layer
-        self.fc2 = nn.Linear(in_features=1024, out_features=1)
+        # Fully connected layer
+        # 92 because 371/2 = 185.5 -> 185/2 = 92.5 -> 92
+        self.fc1 = nn.Linear(in_features=16*92*92, out_features=num_classes)
     
+    # Forward pass
     def forward(self, x):
         
-        # Apply the first convolutional layer
+        # First convolutional layer
         x = F.relu(self.conv1(x))
         
-        # Apply the maxpooling layer
+        # Max pooling layer
         x = self.pool(x)
         
-        # Apply the second convolutional layer
+        # Second convolutional layer
         x = F.relu(self.conv2(x))
         
-        # Apply the maxpooling layer
+        # Max pooling layer
         x = self.pool(x)
         
-        # Flatten the tensor
-        x = x.view(-1, 92*92*64)
+        # Flatten the data
+        x = x.reshape(x.shape(0), -1)
         
-        # Apply the first fully connected layer
-        x = F.relu(self.fc1(x))
-        
-        # Apply the final fully connected layer with sigmoid activation function
-        x = F.sigmoid(self.fc2(x))
+        # Fully connected layer
+        x = self.fc1(x)
         
         return x
 
@@ -144,16 +141,12 @@ def main():
     
     # Split the data into training, validation, and testing set in ratio 80:10:10
     data_train, labels_train, data_val, labels_val, data_test, labels_test = split_data(data, labels)
-    
-    # Set the device
-    if torch.backends.mps.is_available():
-        mps_device = torch.device("mps")
         
-    else:
-        print ("MPS device not found.")
-        
+    # Set device
+    device = torch.device('mps' if torch.backends.mps.is_available() else 'cuda')
+                          
     # Instantiate the model
-    model = CNN().to(mps_device)
+    model = CNN().to(device)
     
 
 if __name__ == '__main__':
