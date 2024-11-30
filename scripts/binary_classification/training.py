@@ -45,7 +45,7 @@ class CNN(nn.Module):
     
     # Here we are basically defining the layers of the model
     # To then use them in the forward pass
-    def __init__(self, in_channels=1, num_classes=2):
+    def __init__(self, in_channels=1, num_classes=1):
         
         super(CNN, self).__init__()
         
@@ -160,7 +160,7 @@ def main():
     num_epochs = 1
     
     # Loss and optimizer
-    criterion = nn.BCELoss()
+    criterion = nn.BCEWithLogitsLoss()
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     
     # Data loaders
