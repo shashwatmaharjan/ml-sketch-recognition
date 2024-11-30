@@ -2,6 +2,7 @@
 import os
 import json
 import numpy as np
+import torch
 
 # Main function
 def main():
@@ -41,6 +42,13 @@ def main():
     # Create the labels
     household_objects_labels = np.zeros(num_household_objects)
     animals_labels = np.ones(num_animals)
+    
+    # Set the device
+    if torch.backends.mps.is_available():
+        mps_device = torch.device("mps")
+        
+    else:
+        print ("MPS device not found.")
     
 
 if __name__ == '__main__':
