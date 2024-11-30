@@ -163,6 +163,11 @@ def main():
     criterion = nn.BCELoss()
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     
+    # Data loaders
+    train_dataset = DataLoader(dataset=list(zip(data_train, labels_train)), batch_size=batch_size, shuffle=True)
+    val_dataset = DataLoader(dataset=list(zip(data_val, labels_val)), batch_size=batch_size, shuffle=False)
+    test_dataset = DataLoader(dataset=list(zip(data_test, labels_test)), batch_size=batch_size, shuffle=False)
+    
 
 if __name__ == '__main__':
 
