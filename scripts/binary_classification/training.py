@@ -83,7 +83,7 @@ class CNN(nn.Module):
         x = self.pool(x)
         
         # Flatten the data
-        x = x.reshape(x.shape(0), -1)
+        x = x.reshape(x.shape[0], -1)
         
         # Fully connected layer
         x = self.fc1(x)
