@@ -10,6 +10,35 @@ from torch import nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+# Function to randomly shuffle the data
+def shuffle_data(data, labels):
+    
+    np.random.seed(SEED)
+    
+    np.random.shuffle(data)
+    np.random.shuffle(labels)
+    
+    return data, labels
+
+
+# Function to split the data into training, validation, and testing set
+def split_data(data, labels):
+    
+    # Split the data into training, validation, and testing set in ratio 80:10:10
+    # Training set
+    data_train = data[:, :int(0.8*data.shape[0])]
+    labels_train = labels[:int(0.8*data.shape[0])]
+    
+    # Validation set
+    data_val = data[:, int(0.8*data.shape[0]):int(0.9*data.shape[0])]
+    labels_val = labels[int(0.8*data.shape[0]):int(0.9*data.shape[0])]
+    
+    # Testing set
+    data_test = data[:, int(0.9*data.shape[0]):]
+    labels_test = labels[int(0.9*data.shape[0]):]
+    
+    return data_train, labels_train, data_val, labels_val, data_test, labels_test
+
 # CNN model
 class CNN(nn.Module):
     
@@ -66,6 +95,8 @@ class CNN(nn.Module):
 
 # Main function
 def main():
+    
+    global SEED
 
     # Define directories
     current_directory = os.getcwd()
@@ -76,11 +107,6 @@ def main():
     # Open the .json files with the class names
     with open(os.path.join(data_directory, 'classes.json'), 'r') as file:
         classes = json.load(file)
-
-    # Working classes for binary classification
-    selected_classes = {}
-    selected_classes['household_objects'] = classes['household_objects']
-    selected_classes['animals'] = classes['animals']
 
     # Load the .npy files
     household_objects = np.load(os.path.join(npy_files_directory, 'household_objects.npy'))
@@ -106,6 +132,17 @@ def main():
     # Create the labels
     household_objects_labels = np.zeros(num_household_objects)
     animals_labels = np.ones(num_animals)
+    
+    # Stack the data
+    data = np.vstack((household_objects, animals))
+    labels = np.hstack((household_objects_labels, animals_labels))
+    
+    # Randomize the data with a SEED
+    SEED = 42
+    data, labels = shuffle_data(data, labels)
+    
+    # Split the data into training, validation, and testing set in ratio 80:10:10
+    data_train, labels_train, data_val, labels_val, data_test, labels_test = split_data(data, labels)
     
     # Set the device
     if torch.backends.mps.is_available():
