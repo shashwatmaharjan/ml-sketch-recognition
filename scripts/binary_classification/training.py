@@ -39,6 +39,7 @@ def split_data(data, labels):
     
     return data_train, labels_train, data_val, labels_val, data_test, labels_test
 
+
 # CNN model
 class CNN(nn.Module):
     
