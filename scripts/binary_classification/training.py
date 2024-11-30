@@ -168,6 +168,29 @@ def main():
     val_dataset = DataLoader(dataset=list(zip(data_val, labels_val)), batch_size=batch_size, shuffle=False)
     test_dataset = DataLoader(dataset=list(zip(data_test, labels_test)), batch_size=batch_size, shuffle=False)
     
+    # Train the network
+    for epoch in range(num_epochs):
+        
+        loop = tqdm(train_dataset, leave=True)
+        
+        for batch_idx, (data, labels) in enumerate(train_dataset):
+            
+            # Adding unsqueeze to add the channel dimension
+            data = data.unsqueeze(1).to(device)
+            labels = labels.unsqueeze(1).float().to(device) # Convert to float32
+            
+            # Forward pass
+            scores = model(data)
+            loss = criterion(scores, labels)
+            
+            # Backward pass
+            optimizer.zero_grad()
+            loss.backward()
+            
+            # Gradient descent
+            optimizer.step()
+            
+    
 
 if __name__ == '__main__':
 
