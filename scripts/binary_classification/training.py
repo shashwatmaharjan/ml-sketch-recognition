@@ -152,6 +152,13 @@ def main():
     # x = torch.randn(64, 1, 371, 371).to(device)
     # print(model(x).shape)
     
+    # Hyperparameters
+    in_channels = 1
+    num_classes = 2
+    learning_rate = 0.001
+    batch_size = 64
+    num_epochs = 1
+    
 
 if __name__ == '__main__':
 
