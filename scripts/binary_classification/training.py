@@ -10,6 +10,59 @@ from torch import nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+# CNN model
+class CNN(nn.Module):
+    
+    def __init__(self):
+        
+        super(CNN, self).__init__()
+        
+        # Define convolutional layer
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, 
+                               kernel_size=3, stride=1, padding=1)
+        
+        # Define maxpooling layer
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+        
+        # Define convolutional layer
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, 
+                               kernel_size=3, stride=1, padding=1)
+        
+        # Define maxpooling layer
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+        
+        # Define fully connected layer
+        self.fc1 = nn.Linear(in_features=92*92*64, out_features=128)
+        
+        # Define final fully connected layer
+        self.fc2 = nn.Linear(in_features=128, out_features=1)
+    
+    def forward(self, x):
+        
+        # Apply the first convolutional layer
+        x = F.relu(self.conv1(x))
+        
+        # Apply the maxpooling layer
+        x = self.pool(x)
+        
+        # Apply the second convolutional layer
+        x = F.relu(self.conv2(x))
+        
+        # Apply the maxpooling layer
+        x = self.pool(x)
+        
+        # Flatten the tensor
+        x = x.view(-1, 92*92*64)
+        
+        # Apply the first fully connected layer
+        x = F.relu(self.fc1(x))
+        
+        # Apply the final fully connected layer with sigmoid activation function
+        x = F.sigmoid(self.fc2(x))
+        
+        return x
+
+
 # Main function
 def main():
 
