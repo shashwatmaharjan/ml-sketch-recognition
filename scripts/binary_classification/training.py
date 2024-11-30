@@ -159,6 +159,10 @@ def main():
     batch_size = 64
     num_epochs = 1
     
+    # Loss and optimizer
+    criterion = nn.BCELoss()
+    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+    
 
 if __name__ == '__main__':
 
