@@ -31,9 +31,17 @@ def main():
     
     num_animals = animals.shape[2]
     print(f'Number of animals: {num_animals}')
+     
+    # No need to normalize the data since the values are already between 0 and 1
     
+    # Reshape the data
+    household_objects = household_objects.transpose(2, 0, 1)
+    animals = animals.transpose(2, 0, 1)
     
-
+    # Create the labels
+    household_objects_labels = np.zeros(num_household_objects)
+    animals_labels = np.ones(num_animals)
+    
 
 if __name__ == '__main__':
 
