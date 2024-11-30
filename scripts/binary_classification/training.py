@@ -18,24 +18,25 @@ class CNN(nn.Module):
         super(CNN, self).__init__()
         
         # Define convolutional layer
-        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, 
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=16, 
                                kernel_size=3, stride=1, padding=1)
         
         # Define maxpooling layer
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
         
         # Define convolutional layer
-        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, 
+        self.conv2 = nn.Conv2d(in_channels=16, out_channels=32, 
                                kernel_size=3, stride=1, padding=1)
         
         # Define maxpooling layer
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
         
         # Define fully connected layer
-        self.fc1 = nn.Linear(in_features=92*92*64, out_features=128)
+        # Doubles as a flattening layer
+        self.fc1 = nn.Linear(in_features=92*92*32, out_features=1024)
         
         # Define final fully connected layer
-        self.fc2 = nn.Linear(in_features=128, out_features=1)
+        self.fc2 = nn.Linear(in_features=1024, out_features=1)
     
     def forward(self, x):
         
@@ -112,6 +113,9 @@ def main():
         
     else:
         print ("MPS device not found.")
+        
+    # Instantiate the model
+    model = CNN().to(mps_device)
     
 
 if __name__ == '__main__':
