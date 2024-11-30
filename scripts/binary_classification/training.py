@@ -45,6 +45,10 @@ def main():
     household_objects = household_objects.transpose(2, 0, 1)
     animals = animals.transpose(2, 0, 1)
     
+    # Print the shape of the data
+    print(f'Household objects shape: {household_objects.shape}')
+    print(f'Animals shape: {animals.shape}')
+    
     # Create the labels
     household_objects_labels = np.zeros(num_household_objects)
     animals_labels = np.ones(num_animals)
